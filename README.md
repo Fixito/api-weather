@@ -1,6 +1,6 @@
 <h1 align="center">Application Météo</h1>
 
-## Table of Contents
+## Table des matières
 
 - [Overview](#overview)
 - [Installation](#installation)
