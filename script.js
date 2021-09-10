@@ -1,10 +1,10 @@
-const apiKey = "";
+const apiKey = "aebaf59664d5f3b95320bc7b0a961d43";
 const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
 const msg = document.querySelector(".msg");
 const list = document.querySelector(".cities");
 
-form.addEventListener("submit", e => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   const inputVal = input.value;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric&lang=fr`;
@@ -12,14 +12,15 @@ form.addEventListener("submit", e => {
   const listItemsArray = Array.from(listItems);
 
   if (listItemsArray.length > 0) {
-    const filteredArray = listItemsArray.filter(el => {
+    const filteredArray = listItemsArray.filter((el) => {
       let content = "";
 
       if (inputVal.includes(",")) {
-
         if (inputVal.split(",")[1].length > 2) {
           inputVal = inputVal.split(",")[0];
-          content = el.querySelector(".city-name span").textContent.toLowerCase();
+          content = el
+            .querySelector(".city-name span")
+            .textContent.toLowerCase();
         } else {
           content = el.querySelector(".city-name").dataset.name.toLowerCase();
         }
@@ -41,12 +42,10 @@ form.addEventListener("submit", e => {
   }
 
   fetch(url)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       const { main, name, sys, weather } = data;
-      const icon = `https://openweathermap.org/img/wn/${
-        weather[0]["icon"]
-      }@2x.png`;
+      const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
 
       const li = document.createElement("li");
       li.classList.add("city");
@@ -65,10 +64,10 @@ form.addEventListener("submit", e => {
       list.appendChild(li);
     })
     .catch(() => {
-      msg.textContent  = "Cherchez un nom de ville valide :(";
+      msg.textContent = "Cherchez un nom de ville valide :(";
     });
 
-    msg.textContent = "";
-    form.reset();
-    input.focus();
+  msg.textContent = "";
+  form.reset();
+  input.focus();
 });
